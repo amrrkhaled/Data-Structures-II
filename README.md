@@ -10,5 +10,5 @@ This repository contains code implementations and lab exercises for the **Data S
 ```plaintext
 📦 data-structures-2  
 │── 📜 README.md  
-│── 📂 lab1/
+│── 📂 sortings/
 
