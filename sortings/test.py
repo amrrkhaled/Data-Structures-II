@@ -5,7 +5,7 @@ from bubbleSort import bubble_sort
 from selectionSort import selection_sort
 from insertionSort import insertion_sort
 from quickSort import quick_sort_wrapper as quick_sort
-from mergeSort import merge_sort_wrapper as merge_sort
+from mergeSort import merge_sort as merge_sort
 
 def generate_random_array(size):
     return [random.randint(0, 1000) for _ in range(size)]

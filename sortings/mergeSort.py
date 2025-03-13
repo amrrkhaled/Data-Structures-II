@@ -1,18 +1,16 @@
 import random
 from insertionSort import insertion_sort
 
-def merge_sort(arr , THRESHOLD):
-    if(len(arr) <= THRESHOLD):
+def merge_sort(arr):
+   
         if(len(arr) > 1):
             mid = len(arr) // 2
             leftArray = arr[:mid]
             rightArray = arr[mid:]
 
-            merge_sort(leftArray , THRESHOLD)
-            merge_sort(rightArray , THRESHOLD)
+            merge_sort(leftArray)
+            merge_sort(rightArray)
             merge(leftArray , rightArray , arr)
-    else:
-        insertion_sort(arr)
 
 def merge(leftArray , rightArray , arr):
     leftSize = len(arr) // 2
@@ -41,7 +39,4 @@ def merge(leftArray , rightArray , arr):
         r += 1
         i += 1
 
-def merge_sort_wrapper(arr):
-    THRESHOLD = 0
-    merge_sort(arr , THRESHOLD)
 
