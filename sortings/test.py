@@ -5,6 +5,7 @@ from bubbleSort import bubble_sort
 from selectionSort import selection_sort
 from insertionSort import insertion_sort
 from quickSort import quick_sort_wrapper as quick_sort
+from mergeSort import merge_sort
 
 def generate_random_array(size):
     return [random.randint(0, 1000) for _ in range(size)]
@@ -22,6 +23,7 @@ def main():
     selection_times = []
     insertion_times=[]
     quick_sort_times=[]
+    merge_times = []
 
     for size in sizes:
         arr = generate_random_array(size)  
@@ -33,6 +35,8 @@ def main():
         selection_times.append(selection_time)
         insertion_times.append(insertion_time)
         quick_sort_times.append(quick_sort_time)
+        merge_time = measure_execution_time(merge_sort, arr)
+        merge_times.append(merge_time)
 
         print(f"\nArray Size: {size}")
         print(f"{'-'*70}")
@@ -40,6 +44,7 @@ def main():
         print(f"Selection Sort  : {selection_time:<7.3f} ms")
         print(f"Insertion Sort  : {insertion_time:<7.3f} ms")
         print(f"Quick Sort      : {quick_sort_time:<7.3f} ms")
+        print(f"Merge Sort      : {merge_time:<7.3f} ms")
         print(f"{'-'*70}")
 
     # Plot results
@@ -51,6 +56,7 @@ def main():
     plt.plot(sizes, selection_times, marker='s', linestyle='-', label="Selection Sort", color='b')
     plt.plot(sizes, insertion_times, marker='x', linestyle='-', label="Insertion Sort", color='#FFD700')
     plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g')
+    plt.plot(sizes, merge_times, marker='d', linestyle='-', label="Merge Sort", color='purple')
 
     plt.xlabel("Array Size")
     plt.ylabel("Execution Time (ms) - Logarithmic Scale")
@@ -65,6 +71,7 @@ def main():
     plt.plot(sizes, selection_times, marker='s', linestyle='-', label="Selection Sort", color='b')
     plt.plot(sizes, insertion_times, marker='x', linestyle='-', label="Insertion Sort", color='#FFD700')
     plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g')
+    plt.plot(sizes, merge_times, marker='d', linestyle='-', label="Merge Sort", color='purple')
 
     plt.xlabel("Array Size")
     plt.ylabel("Execution Time (ms) - Linear Scale")
