@@ -5,6 +5,8 @@ from bubbleSort import bubble_sort
 from selectionSort import selection_sort
 from insertionSort import insertion_sort
 from quickSort import quick_sort_wrapper as quick_sort
+from mergeSort import merge_sort as merge_sort
+from heapSort import heap_sort
 
 def generate_random_array(size):
     return [random.randint(0, 1000) for _ in range(size)]
@@ -17,11 +19,13 @@ def measure_execution_time(sort_function, arr):
     return (end_time - start_time) * 1000  # Convert to milliseconds
 
 def main():
-    sizes = [100, 200, 500, 1000, 5000, 10000,25000]  
+    sizes = [100, 200, 500, 1000, 5000, 10000,25000]
     bubble_times = []
     selection_times = []
     insertion_times=[]
     quick_sort_times=[]
+    merge_times = []
+    heap_times=[]
 
     for size in sizes:
         arr = generate_random_array(size)  
@@ -29,10 +33,15 @@ def main():
         selection_time = measure_execution_time(selection_sort, arr)
         insertion_time=measure_execution_time(insertion_sort,arr)
         quick_sort_time=measure_execution_time(quick_sort,arr)
+        heap_time=measure_execution_time(heap_sort,arr)
+
         bubble_times.append(bubble_time)
         selection_times.append(selection_time)
         insertion_times.append(insertion_time)
         quick_sort_times.append(quick_sort_time)
+        merge_time = measure_execution_time(merge_sort, arr)
+        merge_times.append(merge_time)
+        heap_times.append(heap_time)
 
         print(f"\nArray Size: {size}")
         print(f"{'-'*70}")
@@ -40,6 +49,8 @@ def main():
         print(f"Selection Sort  : {selection_time:<7.3f} ms")
         print(f"Insertion Sort  : {insertion_time:<7.3f} ms")
         print(f"Quick Sort      : {quick_sort_time:<7.3f} ms")
+        print(f"Merge Sort      : {merge_time:<7.3f} ms")
+        print(f"Heap Sort       : {heap_time:<7.3f} ms")
         print(f"{'-'*70}")
 
     # Plot results
@@ -50,7 +61,9 @@ def main():
     plt.plot(sizes, bubble_times, marker='o', linestyle='-', label="Bubble Sort", color='r')
     plt.plot(sizes, selection_times, marker='s', linestyle='-', label="Selection Sort", color='b')
     plt.plot(sizes, insertion_times, marker='x', linestyle='-', label="Insertion Sort", color='#FFD700')
-    plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g')
+    plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g',markersize=10)
+    plt.plot(sizes, merge_times, marker='d', linestyle='-', label="Merge Sort", color='purple')
+    plt.plot(sizes, heap_times, marker='*', linestyle='-', label="Heap Sort", color='orange',markersize=10)
 
     plt.xlabel("Array Size")
     plt.ylabel("Execution Time (ms) - Logarithmic Scale")
@@ -64,7 +77,9 @@ def main():
     plt.plot(sizes, bubble_times, marker='o', linestyle='-', label="Bubble Sort", color='r')
     plt.plot(sizes, selection_times, marker='s', linestyle='-', label="Selection Sort", color='b')
     plt.plot(sizes, insertion_times, marker='x', linestyle='-', label="Insertion Sort", color='#FFD700')
-    plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g')
+    plt.plot(sizes, quick_sort_times, marker='.', linestyle='-', label="Quick Sort", color='g',markersize=10)
+    plt.plot(sizes, merge_times, marker='d', linestyle='-', label="Merge Sort", color='purple')
+    plt.plot(sizes, heap_times, marker='*', linestyle='-', label="Heap Sort", color='orange',markersize=10)
 
     plt.xlabel("Array Size")
     plt.ylabel("Execution Time (ms) - Linear Scale")
