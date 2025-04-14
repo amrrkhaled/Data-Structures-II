@@ -46,7 +46,10 @@ class RedBlackTree:
             else:
                 sys.stdout.write("L----")
                 indent += "|    "
+            #Using sys.stdout.write() which prints to the output stream
+            #But doesn't add a new line automatically like print()
 
+            #OR use print() and concatenate all the above
             s_color = "RED" if node.color == True else "BLACK"
             print(str(node.value) + "(" + s_color + ")")
             self.__print_helper(node.left, indent, False)
