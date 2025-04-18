@@ -219,3 +219,21 @@ class RedBlackTree:
         n=self.size
         print("Size of Tree : "+str(n))
 
+if __name__ == "__main__":
+    rbt = RedBlackTree()
+
+    for i in range(1, 11):
+        rbt.insert(i)
+
+    print("Inorder Traversal of Tree:")
+    rbt.inorder(rbt.root)
+    print("\n")
+
+    print("Tree Structure:")
+    rbt.print_tree()
+
+    # Print tree properties
+    print("\nTree Info:")
+    rbt.print_tree_size()
+    rbt.print_height()
+    rbt.print_black_height()
