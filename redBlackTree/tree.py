@@ -93,7 +93,45 @@ class RedBlackTree:
         else:
             return grandparent.left
 
-        
+    def rotate_left(self, x):
+        y=x.right
+        t2 =y.left
+
+        #Perform Rotation & Update Parents & Their Children
+        if t2 != self.NIL:  #if y node has left child when rotating t2 becomes right child of x node
+            t2.parent=x
+        x.right=t2
+
+        y.left=x
+        y.parent=x.parent
+        if x.parent is None:  #x is the root
+            self.root = y
+        elif x == x.parent.left: #x is a left child to parent node
+            x.parent.left = y #parent's left child is now y node
+        else:  #x is a right child to parent node
+            x.parent.right = y #parent's  right child is now y node
+        x.parent = y #y is now the parent of x
+
+
+    def rotate_right(self,x):
+        y=x.left
+        t2=y.right
+
+        # Perform Rotation & Update Parents & Their Children
+        if t2 != self.NIL:
+            t2.parent=x
+        x.left=t2
+
+        y.parent = x.parent
+        if x.parent is None:
+            self.root=y
+        elif x == x.parent.left:
+            x.parent.left = y
+        else:
+            x.parent.right = y
+        y.right = x
+        x.parent = y
+
     def fix_insert(self, node):
         if node.parent is None:
             node.color = BLACK
@@ -143,44 +181,7 @@ class RedBlackTree:
             grandparent.color = RED
             return
         
-    def rotate_left(self, x):
-        y=x.right
-        t2 =y.left
 
-        #Perform Rotation & Update Parents & Their Children
-        if t2 != self.NIL:  #if y node has left child
-            t2.parent=x
-        x.right=t2
-
-        y.left=x
-        y.parent=x.parent
-        if x.parent is None:  #x is the root
-            self.root = y
-        elif x == x.parent.left:
-            x.parent.left = y #Parent of x , its left child is now y node
-        else:
-            x.parent.right = y #Parent of x , its right child is now y node
-        x.parent = y #y is now the parent of x
-
-
-    def rotate_right(self,x):
-        y=x.left
-        t2=y.right
-
-        # Perform Rotation & Update Parents & Their Children
-        if t2 != self.NIL:
-            t2.parent=x
-        x.left=t2
-
-        y.parent = x.parent
-        if x.parent is None:
-            self.root=y
-        elif x == x.parent.left:
-            x.parent.left = y
-        else:
-            x.parent.right = y
-        y.right = x
-        x.parent = y
 
 if __name__ == "__main__":
     bst = RedBlackTree()
