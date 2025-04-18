@@ -8,7 +8,7 @@ class DictionaryApp:
     def load_dictionary(self, dictionary_file):
         with open(dictionary_file, "r") as file:
             for line in file:
-                word = line.strip()
+                word = line.strip().lower()
                 self.dictionaryRBT.insert(word)
         print("Dictionary loaded into Red-Black Tree successfully....!")
         self.validation()
@@ -21,7 +21,7 @@ class DictionaryApp:
 
     def lookup_word(self):
         print("-> Enter the word to look-up in Dictionary:")
-        word = input()
+        word = input().strip().lower()
         node = self.dictionaryRBT.searchTree(word)
         if node == self.dictionaryRBT.NIL:
             print("NO:(")
@@ -30,7 +30,7 @@ class DictionaryApp:
     
     def insert_word(self):
         print("-> Enter the word to insert in Dictionary:")
-        word = input()
+        word = input().strip().lower()
         node = self.dictionaryRBT.searchTree(word)
         if node == self.dictionaryRBT.NIL:
             self.dictionaryRBT.insert(word)
