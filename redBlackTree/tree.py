@@ -194,7 +194,7 @@ class RedBlackTree:
         # path = 0 go left
 
         if node == self.NIL:
-            return 1
+            return 0
         else:
             if path :
                 if node.color == BLACK :
