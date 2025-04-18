@@ -219,19 +219,3 @@ class RedBlackTree:
         n=self.size
         print("Size of Tree : "+str(n))
 
-if __name__ == "__main__":
-    bst = RedBlackTree()
-
-    bst.insert(2)
-    bst.insert(1)
-    bst.insert(4)
-    bst.insert(5)
-    bst.insert(9)
-    bst.insert(3)
-    bst.insert(6)
-    bst.insert(7)
-
-    bst.print_tree()
-    bst.print_height()
-    bst.print_black_height()
-    bst.print_tree_size()
