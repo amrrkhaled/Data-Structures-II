@@ -27,8 +27,7 @@ class DictionaryApp:
             print("NO:(")
         else:
             print("YES:)")
-        self.validation()
-
+    
     def insert_word(self):
         print("-> Enter the word to insert in Dictionary:")
         word = input()
@@ -38,9 +37,10 @@ class DictionaryApp:
             print("Word Inserted in Dictionary.")
             with open("Dictionary.txt", "a") as file:
                 file.write(f"{word}\n")
+                self.validation()
         else:
             print("ERROR!! Word already exists in Dictionary.")
-        self.validation()
+        
 
     def start(self):
         print("** Welcome to our Dictionary **")
