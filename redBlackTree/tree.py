@@ -1,4 +1,5 @@
 import sys
+import random
 
 RED = True
 BLACK = False
@@ -19,6 +20,7 @@ class RedBlackTree:
     def __init__(self):
         self.NIL = RBNode(value=None, color=BLACK)
         self.root = self.NIL
+        self.size=0
 
     def inorder(self, node):
         if node != self.NIL:
@@ -82,6 +84,7 @@ class RedBlackTree:
         else:
             parent.right = new_node
 
+        self.size += 1
         self.fix_insert(new_node)
 
     def get_uncle(self, node):
@@ -180,8 +183,41 @@ class RedBlackTree:
             node.color = BLACK
             grandparent.color = RED
             return
-        
 
+    def __height(self,node):
+        if node is None:
+            return -1
+        else:
+            return 1+max(self.__height(node.left),self.__height(node.right))
+    def __black_height(self,node,path):
+        # path = 1 go right
+        # path = 0 go left
+
+        if node == self.NIL:
+            return 1
+        else:
+            if path :
+                if node.color == BLACK :
+                    return 1+ self.__black_height(node.right,random.randint(0,1))
+                else:
+                    return self.__black_height(node.right, random.randint(0, 1))
+            else :
+                if node.color == BLACK:
+                    return 1+ self.__black_height(node.left,random.randint(0,1))
+                else:
+                    return self.__black_height(node.left,random.randint(0,1))
+
+    def print_height(self):
+        h=self.__height(self.root)
+        print("Height of Tree : "+str(h))
+
+    def print_black_height(self):
+        blk_height = self.__black_height(self.root, random.randint(0, 1))
+        print("Black Height of Tree : " + str(blk_height))
+
+    def print_tree_size(self):
+        n=self.size
+        print("Size of Tree : "+str(n))
 
 if __name__ == "__main__":
     bst = RedBlackTree()
@@ -196,3 +232,6 @@ if __name__ == "__main__":
     bst.insert(7)
 
     bst.print_tree()
+    bst.print_height()
+    bst.print_black_height()
+    bst.print_tree_size()
