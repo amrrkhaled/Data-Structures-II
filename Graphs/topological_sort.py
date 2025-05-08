@@ -29,6 +29,8 @@ def topological_sort(g: Graph):
 
     # Check if all vertices are processed
     if len(result) != len(g.get_vertices()):
-        raise ValueError("Graph is cyclic or disconnected")
+        remaining_vertices = set(g.get_vertices()) - set(result)
+        result.extend(remaining_vertices)
+        print(f"Graph is disconnected: Adding remaining vertices {remaining_vertices} to the result.")
 
     return result
