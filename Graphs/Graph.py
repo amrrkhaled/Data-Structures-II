@@ -4,12 +4,22 @@ class Graph:
         self.directed = directed
 
     def add_vertex(self, v):
-        if v not in self.graph:
-            self.graph[v] = []
-            return True
+        if isinstance(v,(list,set)):
+            all_added = True
+            for vertex in v:
+                if vertex not in self.graph:
+                    self.graph[vertex] = []
+                else:
+                    print(f"Vertex {vertex} already exists.")
+                    all_added = False
+            return all_added
         else:
-            print(f"Vertex {v} already exists.")
-            return False
+            if v not in self.graph:
+                self.graph[v] = []
+                return True
+            else:
+                print(f"Vertex {v} already exists.")
+                return False
 
     def add_edge(self, u, v, weight=1):
         if u not in self.graph:
@@ -31,6 +41,7 @@ class Graph:
         if u not in self.graph or v not in self.graph:
             print(f"One or both vertices do not exist.")
             return False
+
 
         # Remove edge from u to v
         found = False
@@ -131,7 +142,6 @@ class Graph:
             for neighbor, _ in self.graph.get(vertex, []):
                 if dfs(neighbor):
                     return True
-
             visited[vertex] = 2
             return False
 
