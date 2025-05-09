@@ -151,11 +151,13 @@ class Graph:
             print(f"{v} -> {neighbors}")
 
     def print_undirected_graph(self):
-
+        if self.directed:
+            print("This is a directed graph. Use print_graph() instead.")
+            return
         visited = set()
         for vertex in self.graph:
             for neighbor, weight in self.graph[vertex]:
-                # Avoid printing duplicate edges
+
                 if (vertex, neighbor) not in visited and (neighbor, vertex) not in visited:
                     print(f"{vertex} <-> {neighbor}  (w = {weight})")
                     visited.add((vertex, neighbor))
@@ -167,7 +169,7 @@ class Graph:
 
         for vertex in self.graph:
             for neighbor, weight in self.graph[vertex]:
-                # Avoid double counting the edge
+
                 if (vertex, neighbor) not in visited and (neighbor, vertex) not in visited:
                     total_cost += weight
                     visited.add((vertex, neighbor))
