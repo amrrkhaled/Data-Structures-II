@@ -4,12 +4,13 @@ from prims import prims
 
 # Test 1: A cyclic graph
 g1 = Graph(directed=True)
-g1.add_vertex("A")
-g1.add_vertex("B")
-g1.add_vertex("C")
+vertices=['A','B','C','D']
+g1.add_vertex(vertices)
+
 g1.add_edge("A", "B")
 g1.add_edge("B", "C")
 g1.add_edge("C", "A")  # Adding cycle
+g1.add_edge("D","A")
 
 # Print the graph structure
 print("\nGraph 1 (Cyclic):")
@@ -26,16 +27,13 @@ except ValueError as e:
 
 # Test 2: A disconnected graph with multiple components
 g2 = Graph(directed=True)
-g2.add_vertex("A")
-g2.add_vertex("B")
-g2.add_vertex("C")
-g2.add_vertex("D")
+g2.add_vertex(vertices)
 g2.add_vertex("E")
 g2.add_vertex("F")
 g2.add_edge("A", "B")
 g2.add_edge("B", "C")
 g2.add_edge("D", "E")
-g2.add_edge("E", "F")  
+g2.add_edge("E", "F")
 
 # Print the graph structure
 print("\nGraph 2 (Disconnected):")
@@ -51,11 +49,8 @@ except ValueError as e:
 
 # Prims Algorithm Test
 print("\nPrim's Algorithm on Graph 3:")
-g3 = Graph(directed=False)  
-g3.add_vertex("A")
-g3.add_vertex("B")
-g3.add_vertex("C")
-g3.add_vertex("D")  
+g3 = Graph(directed=False)
+g3.add_vertex(vertices)
 g3.add_vertex("E")
 g3.add_vertex("F")
 g3.add_vertex("G")
@@ -75,4 +70,10 @@ g3.add_edge('B', 'F', 7)
 
 
 start_vertex = "A"
-prims(g3, start_vertex)
+try:
+    prims(g3, start_vertex)
+except ValueError as e:
+    print(e)
+
+
+
