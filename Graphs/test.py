@@ -1,5 +1,6 @@
 from Graph import Graph
 from topological_sort import topological_sort
+from prims import prims
 
 # Test 1: A cyclic graph
 g1 = Graph(directed=True)
@@ -47,3 +48,31 @@ try:
     print("Sorted Nodes:", sorted_nodes)  # Should correctly sort both components
 except ValueError as e:
     print(e)
+
+# Prims Algorithm Test
+print("\nPrim's Algorithm on Graph 3:")
+g3 = Graph(directed=False)  
+g3.add_vertex("A")
+g3.add_vertex("B")
+g3.add_vertex("C")
+g3.add_vertex("D")  
+g3.add_vertex("E")
+g3.add_vertex("F")
+g3.add_vertex("G")
+
+g3.add_edge('G', 'D', 2)
+g3.add_edge('G', 'A', 8)
+g3.add_edge('D', 'A', 4)
+g3.add_edge('D', 'C', 1)
+g3.add_edge('D', 'E', 10)
+g3.add_edge('D', 'B', 2)
+g3.add_edge('A', 'C', 5)
+g3.add_edge('C', 'B', 2)
+g3.add_edge('B', 'E', 5)
+g3.add_edge('A', 'F', 1)
+g3.add_edge('C', 'F', 4)
+g3.add_edge('B', 'F', 7)
+
+
+start_vertex = "A"
+prims(g3, start_vertex)
