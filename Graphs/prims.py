@@ -2,6 +2,8 @@ from Graph import Graph
 from queue import PriorityQueue
 
 def prims_mst(g: Graph, start_vertex):
+    if g.directed:
+        raise ValueError("Graph is directed")
     vertices = g.get_vertices()
     if start_vertex not in vertices:
         print(f"Vertex {start_vertex} does not exist.")
@@ -37,12 +39,23 @@ def prims_mst(g: Graph, start_vertex):
 
     return result
 
-def prims(g: Graph, start_vertex):
+def prims(g: Graph, start_vertex=None):
+    if g.directed:
+        raise ValueError("Graph is directed")
+    if start_vertex is None:
+        vertices=g.get_vertices()
+        start_vertex=vertices[0]
+
     mst = prims_mst(g, start_vertex)
+    if len(mst.get_vertices()) != len(g.get_vertices()):
+        raise ValueError("Graph is disconnected.")
+
     if mst:
         cost = mst.calculate_cost()
         print(f"Minimum Spanning Tree Cost: {cost}")
         print("Minimum Spanning Tree Edges:")
         mst.print_undirected_graph()
+
     else:
         print("MST could not be generated.")
+
